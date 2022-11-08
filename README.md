@@ -1,5 +1,15 @@
 # Transcription
 
+This script is for fixing two problems with the output of the [Whisper](https://github.com/openai/whisper) model:
+
+1. Incorrect timestamps in the output.
+
+2. Output stuck in a loop due to long segments of silence in the audio.
+
+For fixing the first issue, I am using a slightly modified version of [stable-whisper](https://github.com/jianfch/stable-ts) by [jianfch](https://github.com/jianfch).
+
+For the second issue, I use [pyannote audio](https://github.com/pyannote/pyannote-audio) to obtain non-silent audio segments, and feed those segments one after another into Whisper for transcription.
+
 ## Requirements
 
 1. install [Whisper](https://github.com/openai/whisper#setup)
@@ -18,7 +28,7 @@
 
 ## Usage
 
-Place audio files(.wav or .mp3) or video files(.mp4) in the folder named "to_process".
+Place audio files(.wav or .mp3) or video files(.mp4) in the folder named "to_process". The script will batch process all files contained in the foler.
 
 run the file "transcription.py" to obtain transcriptions for all the files in the folder "to_process".
 
@@ -33,4 +43,9 @@ Transcribe files in Japanese and write a subtitle file with the timestamps and s
 python transcription.py -l ja -task translate -txt -srt
 ```
 Translate files from Japanese to English and write the translations in a text and a subtitle file with the timestamps.
+
+```
+python transcription.py -h
+```
+For a full list of commands.
 
