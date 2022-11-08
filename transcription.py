@@ -56,9 +56,6 @@ def get_file_list(directory):
     
     return files
 
-
-
-
 def main():
 
     parser = argparse.ArgumentParser()
@@ -79,10 +76,7 @@ def main():
     print("The threshold for considering the segment as silence: ", args.silence)
 
     model = whisper.load_model("large")
-
-    if args.task.casefold() in ['transcribe']:    
-        # modify model to fix timestamps
-        modify_model(model)
+    modify_model(model)
 
     # obtain a list of files to be processed
     files = get_file_list(args.directory)
